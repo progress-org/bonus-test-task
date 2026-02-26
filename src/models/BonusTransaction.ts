@@ -15,6 +15,7 @@ export class BonusTransaction extends Model<
   declare user_id: string;
   declare type: 'accrual' | 'spend';
   declare amount: number;
+  declare remainder: number | null;
   declare expires_at: Date | null;
   declare request_id: string | null;
   declare created_at: CreationOptional<Date>;
@@ -47,6 +48,10 @@ export function initBonusTransactionModel(sequelize: Sequelize): void {
         validate: {
           min: 1,
         },
+      },
+      remainder: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       },
       expires_at: {
         type: DataTypes.DATE,
